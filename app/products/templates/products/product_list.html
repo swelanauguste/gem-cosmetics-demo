@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block head_title %}
+Products -
+{% endblock head_title %}
+
+
+
+{% block content %}
+
+
+<!-- Page Content -->
+<!-- Items Starts Here -->
+<div class="featured-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-sm-12">
+        <div class="section-heading">
+          <!-- <div class="line-dec"></div> -->
+          <!-- <h1>Featured Items</h1> -->
+        </div>
+      </div>
+      <div class="col-md-8 col-sm-12">
+        <div id="filters"
+          class="button-group">
+          <button class="btn btn-primary"
+            data-filter="*">All Products</button>
+          <!-- <button class="btn btn-primary"
+            data-filter=".new">Newest</button>
+          <button class="btn btn-primary"
+            data-filter=".low">Low Price</button>
+          <button class="btn btn-primary"
+            data-filter=".high">Hight Price</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="featured container no-gutter">
+
+  <div class="row posts">
+
+    {% for object in object_list %}
+    <div id="{{ object.id }}"
+      class="item new col-md-4">
+      <a href="{{object.slug}}">
+        <div class="featured-item">
+          <img 
+          {% if object.images.first.image.url %}
+          src="{{object.images.first.image.url}}"
+          {% endif %}
+            alt="">
+          <h4>{{object.name|title}}</h4>
+          <h6>XCD${{object.price}}</h6>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+<div class="page-navigation">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        {% include 'pagination.html' %}
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Featred Page Ends Here -->
+{% endblock content %}
